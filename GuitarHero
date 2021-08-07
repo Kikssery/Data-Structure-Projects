@@ -1,0 +1,44 @@
+// assignment: guitar hero
+
+public class GuitarHero {
+
+    private static double A = 440.0;
+
+    private static String keyboard = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
+
+    public static void main(String[] args) {
+
+        GuitarString string = new GuitarString(A);
+
+        // the main input loop
+
+        while (true) {
+
+            // check if the user has typed a key, and, if so, process it
+            if (StdDraw.hasNextKeyTyped()) {
+
+                // the user types this character
+                char key = StdDraw.nextKeyTyped();
+
+                if (keyboard.indexOf(key) > -1) {
+
+                    double i = keyboard.indexOf(key);
+
+                    string = new GuitarString(A * Math.pow(2, (i - 24) / 12));
+
+                    string.pluck();
+
+                    double sample = string.sample();
+
+                }
+
+            }
+
+
+            StdAudio.play(string.sample());
+
+            string.tic();
+        }
+    }
+
+}
